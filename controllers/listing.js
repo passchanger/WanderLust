@@ -36,7 +36,10 @@ module.exports.createListings = async(req, res, next)=>{
             q: req.body.listing.location, // user-entered location
             format: "json",
             limit: 1
-        }
+        },
+         headers: {
+        "User-Agent": "WanderlustApp/1.0 (your-email@example.com)" // koi bhi valid email/identifier de do
+      }
     });
 
     const geo = response.data[0]; // take first result
