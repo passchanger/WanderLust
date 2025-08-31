@@ -140,22 +140,21 @@
   <div class="col-6 offset-3 mb-3">
     <h3>Where you'll be</h3>
     <div id="map"></div>
-      <script>
-        const listing = <%- JSON.stringify(listing) %>;
-        const lat = listing.geometry.coordinates[1];
-        const lng = listing.geometry.coordinates[0];
+    <script>
+      const listing = <%- JSON.stringify(listing) %>;
+      const lat = listing.geometry.coordinates[1];
+      const lng = listing.geometry.coordinates[0];
 
-        var map = L.map("map").setView([lat, lng], 12);
+      var map = L.map("map").setView([lat, lng], 12);
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-        }).addTo(map);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+      }).addTo(map);
 
-        L.marker([lat, lng])
-          .addTo(map)
-          .bindPopup(`<b>${listing.title}</b><br>${listing.location}`)
-          .openPopup();
-      </script>
-    </div>
+      L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(`<b>${listing.title}</b><br>${listing.location}`)
+        .openPopup();
+    </script>
   </div>
 </div>
