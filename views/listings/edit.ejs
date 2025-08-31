@@ -5,7 +5,13 @@
       <h3>Edit this listing</h3>
       <br />
 
-      <form action="/listings/<%= listing._id %>?_method=PUT" method="post">
+      <form
+        action="/listings/<%= listing._id %>?_method=PUT"
+        method="post"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+      >
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input
@@ -13,22 +19,38 @@
             type="text"
             value="<%= listing.title %>"
             name="listing[title]"
+            required
           />
+          <div class="valid-feedback">Title looks Good</div>
+          <div class="invalid-feedback">Title should be valid</div>
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <textarea class="form-control" name="listing[description]">
+          <textarea class="form-control" name="listing[description]" required>
 <%= listing.description %></textarea
           >
+          <div class="valid-feedback">Good Description</div>
+          <div class="invalid-feedback">Desciption should be valid</div>
         </div>
         <div class="mb-3">
-          <label for="image" class="form-label">Image Link</label>
+          <img
+            src="<%= originalImageUrl %>"
+            alt=""
+            height="200px"
+            width="300px"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload Image</label>
           <input
             class="form-control"
-            type="text"
-            value="<%= listing.image.url %>"
+            type="file"
             name="listing[image]"
+            required
           />
+          <div class="invalid-feedback">
+            Please enter a valid Link for image
+          </div>
         </div>
         <div class="row">
           <div class="mb-3 col-md-4">
@@ -38,7 +60,10 @@
               type="number"
               value="<%= listing.price %>"
               name="listing[price]"
+              required
             />
+            <div class="valid-feedback">Best Price</div>
+            <div class="invalid-feedback">Price should be valid</div>
           </div>
           <div class="mb-3 col-md-8">
             <label for="location" class="form-label">Location</label>
@@ -47,7 +72,10 @@
               type="text"
               value="<%= listing.location %>"
               name="listing[location]"
+              required
             />
+            <div class="valid-feedback">Nice Location!</div>
+            <div class="invalid-feedback">Location should be valid</div>
           </div>
         </div>
 
@@ -58,7 +86,10 @@
             type="text"
             value="<%= listing.country %>"
             name="listing[country]"
+            required
           />
+          <div class="valid-feedback">Great Country</div>
+          <div class="invalid-feedback">Country name should be valid</div>
         </div>
         <div class="mt-3">
           <button class="btn btn-dark add-btn mb-3">Edit</button>
