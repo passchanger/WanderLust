@@ -1,9 +1,21 @@
 const Listing = require("../models/listing.js");
 
 module.exports.index = async (req, res) => {
-  const allListings = await Listing.find({});
-  // console.log(allListings);
-  res.render("listings/index.ejs", { allListings });
+  const { q } = req.query;
+
+  let allListings;
+
+  if (q) {
+    const searchRegex = new RegExp(q, "i"); // case-insensitive search
+
+    allListings = await Listing.find({
+      $or: [{ title: searchRegex }, { location: searchRegex }],
+    });
+  } else {
+    allListings = await Listing.find({});
+  }
+
+  res.render("listings/index.ejs", { allListings, q });
 };
 
 module.exports.renderNewForm = (req, res) => {
